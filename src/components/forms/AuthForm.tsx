@@ -2,41 +2,99 @@
 
 //Hooks/Packges
 import { useState, useMemo, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { Form, Formik } from "formik";
 import { loginSchema, signupSchema } from "@/utils/validationSchemas";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { signIn, useSession } from "next-auth/react";
 
 //Component
 import Input from "../inputs/Input";
 
 //Types
-import { AuthFormState } from "@/types";
+import { AuthFormState, AuthForm } from "@/types";
 
 const AuthForm = () => {
+  //States / Hooks
   const [formState, setFormState] = useState<AuthFormState>("login");
-
-  // Form initials
-  const formInit = useMemo(() => {
-    if (formState === "login") {
-      return {
-        values: { email: "", password: "" },
-        schema: loginSchema,
-      };
-    } else {
-      return {
-        values: { name: "", email: "", password: "", confirmPassword: "" },
-        schema: signupSchema,
-      };
-    }
-  }, [formState]);
+  const router = useRouter();
+  const { data: session, status } = useSession();
 
   //Actions
-  //Submit
-  const onSubmit = useCallback(() => {}, []);
+
+  //Login
+  const login = useCallback(
+    async (values: AuthForm) => {
+      signIn("credentials", {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+        callbackUrl: "/",
+      }).then(callback => {
+        // Check if authenticated
+        if (callback?.ok && status === "authenticated") {
+          toast.success("Logged in successfully!");
+          router.push("/");
+        }
+
+        if (callback?.error) {
+          toast.error(callback.error);
+        }
+      });
+    },
+    [router, status]
+  );
+
+  // Register/Signup
+  const register = useCallback(
+    async (values: AuthForm) => {
+      await axios
+        .post(`/api/register`, values)
+        .then(response => {
+          // OnSuccess
+          if (response.status == 200) {
+            login(values);
+          }
+        })
+        .catch(error => {
+          //On Error
+          if (error.response.data.error) {
+            toast.error(error.response.data.error);
+          } else {
+            toast.error("Somthing went wrong");
+          }
+        });
+    },
+    [login]
+  );
   //Toggle Form State
   const toggleFormState = useCallback(
     () => setFormState(current => (current === "login" ? "signup" : "login")),
     []
   );
+
+  // Form initials
+  const formInit = useMemo(() => {
+    if (formState === "login") {
+      return {
+        values: { email: "", password: "" } as AuthForm,
+        schema: loginSchema,
+        onSubmit: login,
+      };
+    } else {
+      return {
+        values: {
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+        } as AuthForm,
+        schema: signupSchema,
+        onSubmit: register,
+      };
+    }
+  }, [formState, login, register]);
 
   return (
     <div className="flex justify-center">
@@ -46,7 +104,7 @@ const AuthForm = () => {
         </h2>
         <Formik
           initialValues={formInit.values}
-          onSubmit={onSubmit}
+          onSubmit={formInit.onSubmit}
           validationSchema={formInit.schema}
         >
           {({ errors, touched }) => {
