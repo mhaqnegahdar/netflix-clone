@@ -14,3 +14,12 @@ export interface InputProps {
 // States
 
 export type AuthFormState = "login" | "signup";
+
+// Values
+
+export type AuthForm = {
+  name?: string;
+  email: string;
+  password: string;
+  confirmPassword?: string;
+};
