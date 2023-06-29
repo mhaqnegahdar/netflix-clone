@@ -10,7 +10,7 @@ Explore the [demo](https://maxjn-netflix-clone.vercel.app/) for better understan
 - TypeScript
 - **Nextjs v13.4.1**
 - **Main Packages:** mongodb, mongoose, next-auth, prisma ,redux-toolkit, react-reudux, jest
-- **Secondary Packages:**
+- **Secondary Packages:** react-icons, bcrypt
 - **Routing:** useing new app directory
 
 ## Features

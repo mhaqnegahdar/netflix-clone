@@ -1,60 +1,72 @@
 "use client";
 
 //Hooks/Packges
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikProps } from "formik";
 import { loginSchema, signupSchema } from "@/utils/validationSchemas";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { signIn, useSession } from "next-auth/react";
 
+// Icons
+import { FcGoogle } from "react-icons/fc";
+import { AiFillGithub } from "react-icons/ai";
+
 //Component
 import Input from "../inputs/Input";
+import Button from "../Button";
 
 //Types
-import { AuthFormState, AuthForm } from "@/types";
+import { AuthFormState, AuthForm, OnSubmitProps } from "@/types";
 
 const AuthForm = () => {
   //States / Hooks
   const [formState, setFormState] = useState<AuthFormState>("login");
   const router = useRouter();
+  const formRef = useRef<FormikProps<AuthForm>>(null);
   const { data: session, status } = useSession();
 
   //Actions
 
   //Login
   const login = useCallback(
-    async (values: AuthForm) => {
+    async (values: AuthForm, { setSubmitting }: OnSubmitProps) => {
+      // Authentication
       signIn("credentials", {
         email: values.email,
         password: values.password,
         redirect: false,
         callbackUrl: "/",
-      }).then(callback => {
-        // Check if authenticated
-        if (callback?.ok && status === "authenticated") {
-          toast.success("Logged in successfully!");
-          router.push("/");
-        }
-
-        if (callback?.error) {
-          toast.error(callback.error);
-        }
-      });
+      })
+        .then(callback => {
+          // Check if authenticated
+          if (callback?.ok && status === "authenticated") {
+            toast.success("Logged in successfully!");
+            router.push("/");
+          }
+          // Error authorizing user
+          if (callback?.error) {
+            toast.error(callback.error);
+          }
+        })
+        .finally(() => {
+          setSubmitting(false);
+        });
     },
     [router, status]
   );
 
   // Register/Signup
   const register = useCallback(
-    async (values: AuthForm) => {
+    async (values: AuthForm, { setSubmitting }: OnSubmitProps) => {
       await axios
         .post(`/api/register`, values)
         .then(response => {
           // OnSuccess
           if (response.status == 200) {
-            login(values);
+            toast.success("Registered successfully!");
+            login(values, { setSubmitting });
           }
         })
         .catch(error => {
@@ -64,15 +76,16 @@ const AuthForm = () => {
           } else {
             toast.error("Somthing went wrong");
           }
-        });
+        })
+        .finally(() => setSubmitting(false));
     },
     [login]
   );
   //Toggle Form State
-  const toggleFormState = useCallback(
-    () => setFormState(current => (current === "login" ? "signup" : "login")),
-    []
-  );
+  const toggleFormState = useCallback(() => {
+    setFormState(current => (current === "login" ? "signup" : "login"));
+    formRef.current?.resetForm(); //reset inputs state
+  }, []);
 
   // Form initials
   const formInit = useMemo(() => {
@@ -81,6 +94,8 @@ const AuthForm = () => {
         values: { email: "", password: "" } as AuthForm,
         schema: loginSchema,
         onSubmit: login,
+        formId: "login_form",
+        btnLabel: "Login",
       };
     } else {
       return {
@@ -92,6 +107,8 @@ const AuthForm = () => {
         } as AuthForm,
         schema: signupSchema,
         onSubmit: register,
+        formId: "register_form",
+        btnLabel: "Signup",
       };
     }
   }, [formState, login, register]);
@@ -103,17 +120,19 @@ const AuthForm = () => {
           {formState === "login" ? "Login" : "Signup"}
         </h2>
         <Formik
+          innerRef={formRef}
           initialValues={formInit.values}
           onSubmit={formInit.onSubmit}
           validationSchema={formInit.schema}
         >
-          {({ errors, touched }) => {
+          {({ errors, touched, isSubmitting }) => {
             return (
-              <Form className="flex flex-col gap-4">
+              <Form className="flex flex-col gap-4" id={formInit.formId}>
                 {formState === "signup" ? (
                   <Input
                     name="name"
                     label="Name"
+                    disabled={isSubmitting}
                     error={
                       touched.name && errors.name ? errors.name : undefined
                     }
@@ -124,6 +143,7 @@ const AuthForm = () => {
                   name="email"
                   label="Email"
                   type="email"
+                  disabled={isSubmitting}
                   error={
                     touched.email && errors.email ? errors.email : undefined
                   }
@@ -137,12 +157,14 @@ const AuthForm = () => {
                       ? errors.password
                       : undefined
                   }
+                  disabled={isSubmitting}
                 />
                 {formState === "signup" ? (
                   <Input
                     name="confirmPassword"
                     label="Confirm Password"
                     type="password"
+                    disabled={isSubmitting}
                     error={
                       touched.confirmPassword && errors.confirmPassword
                         ? errors.confirmPassword
@@ -150,12 +172,34 @@ const AuthForm = () => {
                     }
                   />
                 ) : null}
-                <button
-                  type="submit"
-                  className="bg-red-600 py-3 text-white rounded-md w-full hover:bg-red-700 transition"
-                >
-                  {formState === "login" ? "Login" : "Signup"}
-                </button>
+
+                <Button
+                  label={formInit.btnLabel}
+                  disabled={isSubmitting}
+                  btnType="submit"
+                  formId={formInit.formId}
+                />
+                {/* OAuth */}
+                <div className="flex flex-row w-full mt-8 items-center justify-center gap-4 ">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      signIn("google");
+                    }}
+                    className="w-10 h-10 bg-white rounded-full flex items-center justify-center transition hover:opacity-80"
+                  >
+                    <FcGoogle size={30} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      signIn("github");
+                    }}
+                    className="w-10 h-10 bg-white rounded-full flex items-center justify-center transition hover:opacity-80"
+                  >
+                    <AiFillGithub size={30} />
+                  </button>
+                </div>
                 <p className="text-neutral-500 mt-12">
                   {formState === "login"
                     ? "First time using Netflix?"
