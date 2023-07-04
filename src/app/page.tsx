@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 import getCurrentUser from "@/actions/getCurrentUser";
 
 // Components
-import EmptyState from "@/components/EmptyState";
 import IndexClient from "./IndexClient";
 
 export default async function Home() {

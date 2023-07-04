@@ -7,13 +7,15 @@ import React from "react";
 
 const Auth = async () => {
   const currentUser = await getCurrentUser();
+
+  console.log("auth user", currentUser);
   //if user is logged in
   if (currentUser) {
     redirect("/");
   }
 
   return (
-    <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-cover bg-fixed ">
+    <main className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-cover bg-fixed ">
       <div className="bg-black w-full h-full lg:bg-opacity-50">
         {/* Nav */}
         <nav className="px-12 py-5">
@@ -29,7 +31,7 @@ const Auth = async () => {
         {/* Form */}
         <AuthForm />
       </div>
-    </div>
+    </main>
   );
 };
 
