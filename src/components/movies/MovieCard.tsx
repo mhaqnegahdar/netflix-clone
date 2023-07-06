@@ -15,7 +15,7 @@ const MovieCard = async ({ movie }: MovieCardProps) => {
   return (
     <article
       className="group bg-zinc-900
-   col-span-1 relative h-[12vw]"
+   col-span-1 relative h-[24vw]  md:h-[12vw]"
     >
       {/* Visible Image */}
       <figure className="h-full w-full cursor-pointer transition duration delay-300 shadow-xl rounded-md group-hover:opacity-90 sm:group-hover:opacity-0 overflow-hidden">
@@ -36,7 +36,7 @@ const MovieCard = async ({ movie }: MovieCardProps) => {
           shadow-xl
           rounded-t-md
           w-full
-          h-[12vw]
+          h-[24vw]  md:h-[12vw]
           overflow-hidden"
         >
           <Image
@@ -49,7 +49,7 @@ const MovieCard = async ({ movie }: MovieCardProps) => {
         <main className="z-10 bg-zinc-800 p-2 lg:p-4 absolute  transition w-full shadow-md rounded-b-md">
           <div className="flex flex-row items-center gap-3">
             {/* Play Button */}
-            <PlayButton />
+            <PlayButton movieId={movie.id} />
             {/* Heart Button*/}
             <FavoriteButton movieId={movie.id} currentUser={currentUser} />
           </div>
@@ -57,12 +57,12 @@ const MovieCard = async ({ movie }: MovieCardProps) => {
             New <span className="text-white">{new Date().getFullYear()}</span>
           </p>
           <div className="flex flex-row mt-4 gap-2 items-center">
-            <p className="text-white text-[10px] lg:text-sm">
+            <p className="text-white text-[14px] lg:text-md">
               {movie.duration}
             </p>
           </div>
           <div className="flex flex-row mt-4 gap-2 items-center">
-            <p className="text-white text-[10px] lg:text-sm">{movie.genre}</p>
+            <p className="text-white text-[14px] lg:text-md">{movie.genre}</p>
           </div>
         </main>
       </div>

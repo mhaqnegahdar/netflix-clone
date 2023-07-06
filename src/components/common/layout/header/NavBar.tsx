@@ -58,7 +58,7 @@ const NavBar = ({ currentUser }: NavBarProps) => {
           navbarBg ? "bg-zinc-900 bg-opacity-90" : ""
         }   relative`}
       >
-        <figure className="h-4 lg:h-7">
+        <figure className="h-5 md:h-6 lg:h-7 ">
           <Image
             src="/images/logo.png"
             alt="Netflix"
@@ -77,7 +77,7 @@ const NavBar = ({ currentUser }: NavBarProps) => {
           className="flex lg:hidden gap-2 items-center ms-8 cursor-pointer relative"
           onClick={toggleMobile}
         >
-          <p className="text-white text-sm">Brows</p>
+          <p className="text-white text-md">Brows</p>
           <BsChevronDown
             className={`text-white transition ${
               toggleMenu ? "rotate-180" : "rotate-0"
@@ -97,7 +97,7 @@ const NavBar = ({ currentUser }: NavBarProps) => {
             onClick={toggleAccountMenu}
             className="flex flex-row items-center gap-2 relative"
           >
-            <figure className="w-7 h-7 lg:w-10 lg:h-10 rounded-md overflow-hidden shrink-0">
+            <figure className=" w-8 h-8 lg:w-10 lg:h-10 rounded-md overflow-hidden shrink-0">
               <Image
                 src={
                   currentUser.image
