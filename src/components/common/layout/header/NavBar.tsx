@@ -14,7 +14,10 @@ import MobileMenu from "./MobileMenu";
 import AccountMenu from "./AccountMenu";
 const TOP_OFFSET = 66;
 
-const NavBar = () => {
+// Types
+import { NavBarProps } from "@/types/props";
+
+const NavBar = ({ currentUser }: NavBarProps) => {
   // ---States---
   const [toggleMenu, setToggleMenu] = useState(false);
   const [toggleAccount, setToggleAccount] = useState(false);
@@ -94,9 +97,13 @@ const NavBar = () => {
             onClick={toggleAccountMenu}
             className="flex flex-row items-center gap-2 relative"
           >
-            <figure className="w-7 h-7 lg:w-10 lg:h-10 rounded-md overflow-hidden">
+            <figure className="w-7 h-7 lg:w-10 lg:h-10 rounded-md overflow-hidden shrink-0">
               <Image
-                src="/images/default-blue.png"
+                src={
+                  currentUser.image
+                    ? currentUser.image
+                    : `/images/default-blue.png`
+                }
                 alt="Netflix"
                 fill
                 className="!static object-contain"
@@ -107,7 +114,7 @@ const NavBar = () => {
                 toggleAccount ? "rotate-180" : "rotate-0"
               } `}
             />
-            <AccountMenu visible={toggleAccount} />
+            <AccountMenu visible={toggleAccount} currentUser={currentUser} />
           </button>
         </div>
       </nav>

@@ -6,6 +6,8 @@ import getCurrentUser from "@/actions/getCurrentUser";
 
 // Components
 import IndexClient from "./IndexClient";
+import Billboard from "@/components/common/layout/Billboard";
+import NavBar from "@/components/common/layout/header/NavBar";
 
 export default async function Home() {
   const currentUser = await getCurrentUser();
@@ -16,9 +18,9 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between text-white p-24">
-      Netflix Clone
-      <IndexClient />
-    </main>
+    <>
+      <NavBar currentUser={currentUser} />
+      <Billboard />
+    </>
   );
 }

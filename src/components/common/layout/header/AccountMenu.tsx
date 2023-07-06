@@ -4,9 +4,9 @@ import Image from "next/image";
 import { signOut } from "next-auth/react";
 
 //Typws
-import { MobileMenuProps } from "@/types/props";
+import { AccountMenuProps } from "@/types/props";
 
-const AccountMenu = ({ visible }: MobileMenuProps) => {
+const AccountMenu = ({ visible, currentUser }: AccountMenuProps) => {
   if (!visible) {
     return null;
   }
@@ -18,16 +18,20 @@ const AccountMenu = ({ visible }: MobileMenuProps) => {
           href="/profile"
           className="px-3 group/item flex flex-row gap-3 items-center w-full"
         >
-          <figure className="w-8 h-8 rounded-md overflow-hidden">
+          <figure className="w-8 h-8 rounded-md overflow-hidden shrink-0">
             <Image
-              src="/images/default-blue.png"
+              src={
+                currentUser.image
+                  ? currentUser.image
+                  : `/images/default-blue.png`
+              }
               alt="Profile"
               fill
               className="!static object-contain"
             />
           </figure>
           <p className="text-white text-sm group-hover/item:underline">
-            UserName
+            {currentUser.name}
           </p>
         </Link>
         <hr className="bg-gray-600 border-0 h-px my-4" />

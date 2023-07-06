@@ -1,4 +1,6 @@
 import { IconType } from "react-icons";
+import { SafeUser } from "./database";
+import AccountMenu from "./../components/common/layout/header/AccountMenu";
 
 // Props
 type ChildrenProp = {
@@ -66,6 +68,15 @@ type MobileMenuProps = {
   visible: boolean;
 };
 
+type NavBarProps = {
+  currentUser: SafeUser;
+};
+
+type AccountMenuProps = {
+  visible: boolean;
+  currentUser: SafeUser;
+};
+
 //Export
 export type {
   ChildrenProp,
@@ -75,4 +86,6 @@ export type {
   EmptyStateProps,
   NavBarItemProps,
   MobileMenuProps,
+  NavBarProps,
+  AccountMenuProps,
 };
