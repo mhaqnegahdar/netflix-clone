@@ -1,6 +1,6 @@
 import { IconType } from "react-icons";
 import { SafeUser } from "./database";
-import AccountMenu from "./../components/common/layout/header/AccountMenu";
+import { Movie } from "@prisma/client";
 
 // Props
 type ChildrenProp = {
@@ -77,6 +77,15 @@ type AccountMenuProps = {
   currentUser: SafeUser;
 };
 
+type MovieListProps = {
+  title: string;
+  movies: Movie[];
+};
+
+type MovieCardProps = {
+  movie: Movie;
+};
+
 //Export
 export type {
   ChildrenProp,
@@ -88,4 +97,6 @@ export type {
   MobileMenuProps,
   NavBarProps,
   AccountMenuProps,
+  MovieListProps,
+  MovieCardProps,
 };
