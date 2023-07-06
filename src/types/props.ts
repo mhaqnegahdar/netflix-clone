@@ -90,6 +90,12 @@ type FavoriteButtonProps = {
   currentUser?: SafeUser | null;
 };
 
+interface MovieSingleProps {
+  params: {
+    movieId: string;
+  };
+}
+
 //Export
 export type {
   ChildrenProp,
@@ -104,4 +110,5 @@ export type {
   MovieListProps,
   MovieCardProps,
   FavoriteButtonProps,
+  MovieSingleProps,
 };

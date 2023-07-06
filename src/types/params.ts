@@ -11,4 +11,8 @@ interface UseFavoriteParams {
   currentUser?: SafeUser | null;
 }
 
-export type { FavoriteIdParams, UseFavoriteParams };
+interface MovieIdParams {
+  movieId: string;
+}
+
+export type { FavoriteIdParams, UseFavoriteParams, MovieIdParams };

@@ -7,7 +7,7 @@ import getMovies from "@/actions/getMovies";
 import getFavoriteMovies from "@/actions/gatFavoriteMovies";
 
 // Components
-import Billboard from "@/components/common/Billboard";
+import Billboard from "@/components/common/billboard/Billboard";
 import NavBar from "@/components/common/layout/header/NavBar";
 import MovieList from "@/components/movies/MovieList";
 

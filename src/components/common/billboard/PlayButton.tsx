@@ -1,8 +1,9 @@
 "use client";
-//Hooks/Packages
+
+// Hooks/Packages
 import { useRouter } from "next/navigation";
 
-// Iconst
+// Icons
 import { BsFillPlayFill } from "react-icons/bs";
 
 // Types
@@ -13,10 +14,11 @@ const PlayButton = ({ movieId }: MovieIdParams) => {
 
   return (
     <button
-      className="w-6 h-6 lg:w-10 lg:h-10 bg-white rounded-full flex justify-center items-center transition hover:bg-neutral-300"
-      onClick={() => router.push(`/watch/${movieId}`)}
+      onClick={() => router.push(`/movies/${movieId}`)}
+      className="bg-white text-black  rounded-md py-1 md:py-2 px-2 md:px-4 w-auto text-sm lg:text-lg font-semibold flex flex-row gap-1 items-center hover:bg-opacity-90 transition"
     >
-      <BsFillPlayFill size={30} />
+      <BsFillPlayFill />
+      Play
     </button>
   );
 };
