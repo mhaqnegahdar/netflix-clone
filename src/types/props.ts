@@ -1,20 +1,19 @@
-import { User } from "@prisma/client";
 import { IconType } from "react-icons";
 
 // Props
-export interface ChildrenProp {
+type ChildrenProp = {
   children: React.ReactNode;
-}
+};
 
-export interface InputProps {
+type InputProps = {
   name: string;
   label: string;
   type?: React.HTMLInputTypeAttribute;
   disabled?: boolean;
   error?: string;
-}
+};
 
-export type InitialButtonProps = {
+type InitialButtonProps = {
   label: string;
   disabled?: boolean;
   outline?: boolean;
@@ -32,9 +31,9 @@ type PublicBTN = InitialButtonProps & {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-export type ButtonProps = FormBTN | PublicBTN;
+type ButtonProps = FormBTN | PublicBTN;
 
-export interface HeadingProps {
+interface HeadingProps {
   title: string;
   subTitle?: string;
   center?: boolean;
@@ -56,31 +55,24 @@ type WithButton = InitialEmptyStateProps & {
   btnLabel: string;
   btnPath: string;
 };
-export type EmptyStateProps = WithoutButton | WithButton;
+type EmptyStateProps = WithoutButton | WithButton;
 
-// States
-
-export type AuthFormState = "login" | "signup";
-
-// Values
-
-export type SafeUser = Omit<
-  User,
-  "createdAt" | "updateAt" | "emailVerified"
-> & {
-  createdAt: string;
-  updateAt: string;
-  emailVerified?: string | null;
+type NavBarItemProps = {
+  label: string;
+  link: string;
 };
 
-export type AuthForm = {
-  name?: string;
-  email: string;
-  password: string;
-  confirmPassword?: string;
+type MobileMenuProps = {
+  visible: boolean;
 };
 
-export type OnSubmitProps = {
-  setSubmitting: (value: boolean) => void;
-  isSubmitting?: boolean;
+//Export
+export type {
+  ChildrenProp,
+  InputProps,
+  ButtonProps,
+  HeadingProps,
+  EmptyStateProps,
+  NavBarItemProps,
+  MobileMenuProps,
 };

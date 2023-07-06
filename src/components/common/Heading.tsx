@@ -1,6 +1,6 @@
 "use client";
 
-import { HeadingProps } from "@/types";
+import { HeadingProps } from "@/types/props";
 
 const Heading = ({ title, subTitle, center }: HeadingProps) => {
   return (

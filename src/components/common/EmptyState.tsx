@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { EmptyStateProps } from "@/types";
+import { EmptyStateProps } from "@/types/props";
 import Heading from "./Heading";
 import Button from "./Button";
 

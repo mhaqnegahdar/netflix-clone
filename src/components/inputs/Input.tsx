@@ -3,7 +3,7 @@
 //Hooks/Packages
 import { ErrorMessage, Field } from "formik";
 //Types
-import { InputProps } from "@/types";
+import { InputProps } from "@/types/props";
 
 const Input = ({ name, label, disabled, error, type }: InputProps) => {
   return (

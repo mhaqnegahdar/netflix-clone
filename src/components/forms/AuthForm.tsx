@@ -15,10 +15,10 @@ import { AiFillGithub } from "react-icons/ai";
 
 //Component
 import Input from "../inputs/Input";
-import Button from "../Button";
+import Button from "../common/Button";
 
 //Types
-import { AuthFormState, AuthForm, OnSubmitProps } from "@/types";
+import { AuthFormState, AuthForm, OnSubmitProps } from "@/types/form-values";
 
 const AuthForm = () => {
   //States / Hooks
