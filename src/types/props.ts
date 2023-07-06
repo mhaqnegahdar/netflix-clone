@@ -85,6 +85,10 @@ type MovieListProps = {
 type MovieCardProps = {
   movie: Movie;
 };
+type FavoriteButtonProps = {
+  movieId: string;
+  currentUser?: SafeUser | null;
+};
 
 //Export
 export type {
@@ -99,4 +103,5 @@ export type {
   AccountMenuProps,
   MovieListProps,
   MovieCardProps,
+  FavoriteButtonProps,
 };
