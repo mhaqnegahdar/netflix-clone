@@ -1,11 +1,14 @@
-import { ChildrenProp } from "@/types/props";
+// Styles
 import "./globals.css";
 import { Inter } from "next/font/google";
+const inter = Inter({ subsets: ["latin"] });
+
+//Types
+import { ChildrenProp } from "@/types/props";
+
+// Components
 import InnerProviders from "@/components/providers/InnerProviders";
 import OuterProviders from "@/components/providers/OuterProviders";
-import NavBar from "@/components/common/layout/header/NavBar";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Netflix",
@@ -17,7 +20,6 @@ export default function RootLayout({ children }: ChildrenProp) {
     <OuterProviders>
       <html lang="en">
         <body suppressHydrationWarning={true}>
-          <NavBar />
           {children}
           <InnerProviders />
         </body>

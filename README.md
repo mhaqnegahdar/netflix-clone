@@ -1,4 +1,4 @@
-# Netflix Clone - Nextjs v13.4.1
+# Netflix Clone - Nextjs v13.4
 
 This is a full-stack practical **Netflix Clone** using [Next.js](https://nextjs.org/) latest features bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
