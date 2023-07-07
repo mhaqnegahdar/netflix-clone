@@ -1,4 +1,5 @@
 //Hooks
+import { redirect } from "next/navigation";
 
 //Actions
 import getCurrentUser from "@/actions/getCurrentUser";
@@ -13,13 +14,14 @@ import EmptyState from "@/components/common/EmptyState";
 
 export default async function Home() {
   const currentUser = await getCurrentUser();
+
+  // If user unauthenticated
+  if (!currentUser) {
+    return redirect("/auth");
+  }
+
   const movies = await getMovies();
   const favMovies = await getFavoriteMovies();
-
-  // If movie did not exist
-  if (!currentUser) {
-    return <EmptyState showBtn btnLabel="Home" btnPath="/" />;
-  }
 
   return (
     <>

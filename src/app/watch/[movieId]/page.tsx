@@ -1,5 +1,9 @@
+// Hooks/Packages
+import { redirect } from "next/navigation";
+
 // Actions
 import getMovieById from "@/actions/getMovieById";
+import getCurrentUser from "@/actions/getCurrentUser";
 
 // Types
 import { MovieSingleProps } from "@/types/props";
@@ -9,10 +13,17 @@ import EmptyState from "@/components/common/EmptyState";
 import BackHomeButton from "@/components/movies/BackHomeButton";
 
 const Watch = async ({ params }: MovieSingleProps) => {
-  const movie = await getMovieById(params);
+  const currentUser = await getCurrentUser();
 
+  // If user unauthenticated
+  if (!currentUser) {
+    return redirect("/auth");
+  }
+
+  const movie = await getMovieById(params);
   // If movie did not exist
   if (!movie) {
+    //if user is logged in
     return (
       <EmptyState subtitle="Back to home" showBtn btnLabel="Home" btnPath="/" />
     );

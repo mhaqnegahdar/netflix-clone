@@ -5,8 +5,8 @@ import Heading from "./Heading";
 import Button from "./Button";
 
 const EmptyState = ({
-  title = "Now exact matches",
-  subtitle = "Try changing ro removing some of your filters.",
+  title = "No exact matches",
+  subtitle = "Try changing or removing some of your filters.",
   showBtn,
   btnLabel,
   btnPath,
