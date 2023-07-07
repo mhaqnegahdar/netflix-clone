@@ -9,15 +9,21 @@ import getFavoriteMovies from "@/actions/gatFavoriteMovies";
 import Billboard from "@/components/common/billboard/Billboard";
 import NavBar from "@/components/common/layout/header/NavBar";
 import MovieList from "@/components/movies/MovieList";
+import EmptyState from "@/components/common/EmptyState";
 
 export default async function Home() {
   const currentUser = await getCurrentUser();
   const movies = await getMovies();
   const favMovies = await getFavoriteMovies();
 
+  // If movie did not exist
+  if (!currentUser) {
+    return <EmptyState showBtn btnLabel="Home" btnPath="/" />;
+  }
+
   return (
     <>
-      <NavBar currentUser={currentUser!} />
+      <NavBar currentUser={currentUser} />
       <Billboard />
       <section className="pb-40">
         <MovieList title="Trending Now" movies={movies} />

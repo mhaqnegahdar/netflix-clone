@@ -1,12 +1,17 @@
-//Hooks
-import { redirect } from "next/navigation";
-
 //Actions
 import getCurrentUser from "@/actions/getCurrentUser";
 import Image from "next/image";
 
+// Components
+import EmptyState from "@/components/common/EmptyState";
+
 const Profile = async () => {
   const currentUser = await getCurrentUser();
+
+  // If movie did not exist
+  if (!currentUser) {
+    return <EmptyState showBtn btnLabel="Home" btnPath="/" />;
+  }
 
   return (
     <main className="flex items-center justify-center h-full">
