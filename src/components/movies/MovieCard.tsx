@@ -8,6 +8,7 @@ import getCurrentUser from "@/actions/getCurrentUser";
 import { MovieCardProps } from "@/types/props";
 import PlayButton from "./PlayButton";
 import FavoriteButton from "./FavoriteButton";
+import InfoButton from "./InfoButton";
 
 const MovieCard = async ({ movie }: MovieCardProps) => {
   const currentUser = await getCurrentUser();
@@ -52,6 +53,8 @@ const MovieCard = async ({ movie }: MovieCardProps) => {
             <PlayButton movieId={movie.id} />
             {/* Heart Button*/}
             <FavoriteButton movieId={movie.id} currentUser={currentUser} />
+            {/* Info Button */}
+            <InfoButton movie={movie} currentUser={currentUser} />
           </div>
           <p className="text-green-400 font-semibold mt-4">
             New <span className="text-white">{new Date().getFullYear()}</span>

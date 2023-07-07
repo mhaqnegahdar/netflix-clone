@@ -6,7 +6,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { onOpen } from "@/redux/modal/infoModalSlice";
 
 // Icons
-import { AiOutlineInfoCircle } from "react-icons/ai";
+import { BsChevronDown } from "react-icons/bs";
 
 // Types
 import { InfoButtonProps } from "@/types/props";
@@ -24,10 +24,9 @@ const InfoButton = ({ movie, currentUser }: InfoButtonProps) => {
   return (
     <button
       onClick={() => handleOpen()}
-      className="bg-white text-white bg-opacity-30 rounded-md py-1 md:py-2 px-2 md:px-4 w-auto text-sm lg:text-lg font-semibold flex flex-row gap-1 items-center hover:bg-opacity-20 transition"
+      className="group/item w-6 h-6 lg:w-10 lg:h-10 border-2 border-white rounded-full flex justify-center items-center ms-auto transition hover:border-neutral-300"
     >
-      <AiOutlineInfoCircle />
-      More Info
+      <BsChevronDown className="text-white" size={20} />
     </button>
   );
 };

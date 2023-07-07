@@ -1,5 +1,4 @@
 import getCurrentUser from "@/actions/getCurrentUser";
-import EmptyState from "@/components/EmptyState";
 import AuthForm from "@/components/forms/AuthForm";
 import Image from "next/image";
 import { redirect } from "next/navigation";
@@ -8,7 +7,6 @@ import React from "react";
 const Auth = async () => {
   const currentUser = await getCurrentUser();
 
-  console.log("auth user", currentUser);
   //if user is logged in
   if (currentUser) {
     redirect("/");

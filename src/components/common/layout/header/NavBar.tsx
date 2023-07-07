@@ -93,9 +93,9 @@ const NavBar = ({ currentUser }: NavBarProps) => {
           <button className="text-gray-200 hover:text-gray-300">
             <BsBell />
           </button>
-          <button
+          <div
             onClick={toggleAccountMenu}
-            className="flex flex-row items-center gap-2 relative"
+            className=" cursor-pointer flex flex-row items-center gap-2 relative"
           >
             <figure className=" w-8 h-8 lg:w-10 lg:h-10 rounded-md overflow-hidden shrink-0">
               <Image
@@ -115,7 +115,7 @@ const NavBar = ({ currentUser }: NavBarProps) => {
               } `}
             />
             <AccountMenu visible={toggleAccount} currentUser={currentUser} />
-          </button>
+          </div>
         </div>
       </nav>
     </header>

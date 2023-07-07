@@ -1,11 +1,14 @@
-import getRandomMovie from "@/actions/getRandomMovie";
-
 // Components
 import InfoButton from "./InfoButton";
 import PlayButton from "./PlayButton";
 
+// Actions
+import getRandomMovie from "@/actions/getRandomMovie";
+import getCurrentUser from "@/actions/getCurrentUser";
+
 const Billboard = async () => {
   const movie = await getRandomMovie();
+  const currentUser = await getCurrentUser();
 
   return (
     <section className="relative h-[56.25vw]">
@@ -26,7 +29,7 @@ const Billboard = async () => {
         </p>
         <div className="flex flex-row items-center mt-3 md:mt-4 gap-3">
           {movie?.id && <PlayButton movieId={movie?.id} />}
-          {movie?.id && <InfoButton movieId={movie?.id} />}
+          {movie?.id && <InfoButton movie={movie} currentUser={currentUser} />}
         </div>
       </div>
     </section>
