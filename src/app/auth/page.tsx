@@ -9,7 +9,7 @@ const Auth = async () => {
 
   //if user is logged in
   if (currentUser) {
-    redirect("/");
+    return redirect("/");
   }
 
   return (

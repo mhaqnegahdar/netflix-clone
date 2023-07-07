@@ -1,3 +1,6 @@
+// Hooks/Packges
+import { redirect } from "next/navigation";
+
 //Actions
 import getCurrentUser from "@/actions/getCurrentUser";
 import Image from "next/image";
@@ -8,9 +11,9 @@ import EmptyState from "@/components/common/EmptyState";
 const Profile = async () => {
   const currentUser = await getCurrentUser();
 
-  // If movie did not exist
+  // If user unauthenticated
   if (!currentUser) {
-    return <EmptyState showBtn btnLabel="Home" btnPath="/" />;
+    return redirect("/");
   }
 
   return (
