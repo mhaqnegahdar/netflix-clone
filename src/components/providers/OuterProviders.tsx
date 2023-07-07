@@ -1,13 +1,16 @@
 "use client";
 
-// Hooks
 import { SessionProvider } from "next-auth/react";
+import { Provider } from "react-redux";
+import store from "@/redux/store";
+import { ContainerProps } from "@/types/props";
 
-//Types
-import { ChildrenProp } from "@/types/props";
-
-const OuterProviders = ({ children }: ChildrenProp) => {
-  return <SessionProvider>{children}</SessionProvider>;
+const OuterProviders = ({ children }: ContainerProps) => {
+  return (
+    <Provider store={store}>
+      <SessionProvider>{children}</SessionProvider>
+    </Provider>
+  );
 };
 
 export default OuterProviders;

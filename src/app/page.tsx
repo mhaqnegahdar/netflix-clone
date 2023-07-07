@@ -1,5 +1,4 @@
 //Hooks
-import { redirect } from "next/navigation";
 
 //Actions
 import getCurrentUser from "@/actions/getCurrentUser";
@@ -16,14 +15,9 @@ export default async function Home() {
   const movies = await getMovies();
   const favMovies = await getFavoriteMovies();
 
-  //if user is not logged in
-  if (!currentUser) {
-    redirect("/auth");
-  }
-
   return (
     <>
-      <NavBar currentUser={currentUser} />
+      <NavBar currentUser={currentUser!} />
       <Billboard />
       <section className="pb-40">
         <MovieList title="Trending Now" movies={movies} />

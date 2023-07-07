@@ -1,6 +1,7 @@
 import { IconType } from "react-icons";
 import { SafeUser } from "./database";
 import { Movie } from "@prisma/client";
+import InfoButton from "./../components/common/billboard/InfoButton";
 
 // Props
 type ChildrenProp = {
@@ -96,6 +97,15 @@ interface MovieSingleProps {
   };
 }
 
+interface ContainerProps {
+  children: React.ReactNode;
+}
+
+type InfoButtonProps = {
+  movie: Movie;
+  currentUser: SafeUser | null;
+};
+
 //Export
 export type {
   ChildrenProp,
@@ -111,4 +121,6 @@ export type {
   MovieCardProps,
   FavoriteButtonProps,
   MovieSingleProps,
+  ContainerProps,
+  InfoButtonProps,
 };

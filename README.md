@@ -17,12 +17,12 @@ Explore the [demo](https://maxjn-netflix-clone.vercel.app/) for better understan
 
 - Environment, Typescript, NextJS Setup
 - MongoDB & Prisma connect, Database creation
-- **Authentication** with NextAuth, Google & Github Login
-- Full responsiveness on all pages
+- **Authentication** using NextAuth, (Google, Github & Credentials)
+- Full responsiveness on all devices
 - API creation
 - Detail-oriented effects and animations using TailwindCSS
 - **Server-side** data fetching
-- **Redux** state management
+- **Redux** state management for managing modal state
 - **Jest & RTL** test
 
 ## Installation

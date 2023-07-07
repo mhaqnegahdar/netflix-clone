@@ -23,7 +23,7 @@ const Watch = async ({ params }: MovieSingleProps) => {
       <nav className="fixed w-full p-4 z-10 flex flex-row items-center gap-8 bg-black bg-opacity-70">
         <BackHomeButton />
         <p className="text-white text-xl md:text-3xl font-bold">
-          <span className="font-light me-1">Watchint</span> {movie.title}
+          <span className="font-light me-1">Watching</span> {movie.title}
         </p>
       </nav>
       <video
