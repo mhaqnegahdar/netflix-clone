@@ -70,7 +70,7 @@ const InfoModal = () => {
               <AiOutlineClose className="text-white " size={20} />
             </button>
 
-            <div className="absolute bottom-[10%] left-10">
+            <div className="absolute bottom-[10%] left-6">
               <p className="text-white text-3xl md:text-4xl h-full lg:text-5xl font-bold mb-80">
                 {movie.title}
               </p>
@@ -81,7 +81,7 @@ const InfoModal = () => {
             </div>
           </div>
           {/* Info */}
-          <div className="py-8 px-12">
+          <div className="py-4 px-6 md:py-8 md:px-12">
             <p className="text-green-400 font-semibold text-lg">New</p>
             <p className=" text-white text-lg">{movie.duration}</p>
             <p className=" text-white text-lg">{movie.genre}</p>

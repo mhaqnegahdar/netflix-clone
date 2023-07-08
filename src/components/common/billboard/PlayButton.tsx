@@ -14,7 +14,7 @@ const PlayButton = ({ movieId }: MovieIdParams) => {
 
   return (
     <button
-      onClick={() => router.push(`/movies/${movieId}`)}
+      onClick={() => router.push(`/watch/${movieId}`)}
       className="bg-white text-black  rounded-md py-1 md:py-2 px-2 md:px-4 w-auto text-sm lg:text-lg font-semibold flex flex-row gap-1 items-center hover:bg-opacity-90 transition"
     >
       <BsFillPlayFill />
