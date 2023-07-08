@@ -28,7 +28,7 @@ const MovieCard = async ({ movie }: MovieCardProps) => {
         />
       </figure>
       {/* Hover Image */}
-      <div className="opacity-0 absolute top-0 transition duration-200 z-10 invisible sm:visible delay-300 w-full scale-0 group-hover:scale-110 group-hover:-translate-y-[6vw] group-hover:translate-x-[2vw] group-hover:opacity-100">
+      <div className="opacity-0 absolute top-0 transition duration-200 z-10  delay-300 w-full scale-0 group-hover:scale-110  group-hover:-translate-y-[6vw] group-hover:translate-x-[2vw] group-hover:opacity-100">
         <figure
           className="cursor-pointer
           object-cover
