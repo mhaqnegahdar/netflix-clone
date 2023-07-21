@@ -38,7 +38,8 @@ Starting a development instance of the app
 ```shell
 npm install
 
-npx prisma push
+npx prisma generat
+npx prisma db push
 
 npm run dev
 ```
